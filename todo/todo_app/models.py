@@ -1,7 +1,6 @@
-from statistics import mode
 from django.db import models
 
-# Create your models here.
+
 class ToDoUser(models.Model):
     id = models.AutoField(primary_key=True, blank=False, null=False)
     name = models.CharField(max_length=20, blank=False, null=False)
@@ -17,6 +16,7 @@ class ToDoUser(models.Model):
 class Task(models.Model):
     id = models.AutoField(primary_key=True, blank=False, null=False)
     title = models.CharField(max_length=150, unique=True, null=False, blank=False)
+    is_completed = models.BooleanField(null=False, blank=False, default=False)
     user = models.ForeignKey(ToDoUser, on_delete=models.CASCADE)
 
     class Meta:
@@ -27,8 +27,11 @@ class Task(models.Model):
 
 class SubTask(models.Model):
     id = models.AutoField(primary_key=True, blank=False, null=False)
-    description = models.TextField(null=True, blank=True)
+    description = models.TextField(null=False, blank=False)
     created_date = models.DateTimeField(auto_now_add=True)
+    is_completed = models.BooleanField(null=False, blank=False, default=False)
+    remind = models.BooleanField(null=False, blank=False, default=False)
+    reminder_datetime = models.DateTimeField(null=True, blank=True)   
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
 
     class Meta:
