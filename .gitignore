@@ -1,0 +1,4 @@
+todo/todo/__init__.py
+todo/todo_app/__init__.py
+todo/todo_app/migrations/__init__.py
+todo/todo_app/migrations/0001_initial.py
